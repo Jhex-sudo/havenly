@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Havenly — Find a place to call yours</title>
+<style>
+:root{--site-primary:#174d3b;--site-secondary:#e8b978;--site-background:#f6f5f0;--site-on-primary:#fff;--site-on-secondary:#1e2b24;--site-on-background:#18231e;--site-font-body:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--site-font-heading:Georgia,"Times New Roman",serif;--site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1;--ink:#18231e;--muted:#6c766f;--line:#e2e5dc;--surface:#fff;--radius:calc(18px * var(--site-radius-scale))}
+*{box-sizing:border-box}body{margin:0;background:light-dark(var(--site-background),#171b19);color:light-dark(var(--ink),#edf2ee);font-family:var(--site-font-body)}button,input,select{font:inherit}button{cursor:pointer}.root{min-height:100vh;background-color:var(--site-background);color:var(--site-on-background)}.wrap{max-width:1180px;margin:auto;padding:0 24px}.topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.04em;font-size:22px}.brand-mark{width:36px;height:36px;border-radius:12px;background:var(--site-primary);color:white;display:grid;place-items:center;font-size:20px}.nav{display:flex;gap:25px;color:var(--muted);font-size:14px}.nav a{color:inherit;text-decoration:none}.nav a:hover{color:var(--site-primary)}.actions{display:flex;gap:10px;align-items:center}.btn{border:1px solid var(--line);border-radius:999px;padding:11px 17px;background:white;color:var(--ink);font-weight:650}.btn.primary{background:var(--site-primary);color:white;border-color:var(--site-primary)}.btn.gold{background:var(--site-secondary);border-color:var(--site-secondary);color:#253027}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center;padding:42px 0 54px}.eyebrow{color:var(--site-primary);font-weight:800;text-transform:uppercase;letter-spacing:.13em;font-size:11px}.hero h1{font:500 calc(56px * var(--site-heading-scale))/1.05 var(--site-font-heading);letter-spacing:-.045em;margin:17px 0 20px;max-width:620px}.hero h1 em{color:var(--site-primary);font-weight:500}.hero p{color:var(--muted);font-size:16px;line-height:1.75;max-width:520px}.searchbox{background:white;padding:10px;border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 40px #23392b0c;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:8px;margin-top:27px}.field{padding:9px 10px;border-right:1px solid var(--line)}.field label{display:block;color:var(--muted);font-size:11px;font-weight:750;margin-bottom:6px}.field input,.field select{border:0;background:transparent;color:#26342c;outline:none;width:100%;min-width:0;font-size:13px}.searchbox .btn{align-self:stretch;border-radius:12px}.hero-visual{min-height:390px;position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(140deg,#d4e0d2,#a8c0a9);padding:18px}.visual-photo{height:360px;border-radius:20px;background:linear-gradient(180deg,#0000 50%,#0008),url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85');background:linear-gradient(180deg,#0000 42%,#0008),url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85');background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:22px;color:white}.visual-photo .caption{font-size:13px;line-height:1.6}.floating-card{position:absolute;top:35px;left:0;background:white;color:var(--ink);padding:14px 16px;border-radius:15px;box-shadow:0 12px 30px #162b1e25;font-size:12px}.floating-card strong{display:block;font-size:17px;margin-top:4px}.floating-card.right{left:auto;right:26px;top:auto;bottom:36px}.section{padding:32px 0 64px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.section-head h2{font:500 calc(34px * var(--site-heading-scale))/1.15 var(--site-font-heading);margin:8px 0}.section-head p{margin:0;color:var(--muted);font-size:14px}.filters{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);border-radius:999px;padding:9px 14px;background:white;color:#4c5b51;font-size:12px;font-weight:700}.chip.active{background:var(--site-primary);color:white;border-color:var(--site-primary)}.listing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.property{border:1px solid var(--line);border-radius:var(--radius);background:white;overflow:hidden;color:var(--ink);transition:transform .18s,box-shadow .18s}.property:hover{transform:translateY(-3px);box-shadow:0 14px 32px #152a1a12}.property-img{height:205px;position:relative;background-size:cover;background-position:center}.tag{position:absolute;top:13px;left:13px;background:white;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:800}.heart{position:absolute;right:13px;top:12px;border:0;border-radius:50%;width:34px;height:34px;background:#ffffffed;font-size:18px}.property-body{padding:18px}.price{font-weight:850;font-size:21px;letter-spacing:-.03em}.price small{font-size:12px;font-weight:500;color:var(--muted)}.property h3{font-size:16px;margin:8px 0 6px}.location{font-size:12px;color:var(--muted)}.specs{display:flex;gap:14px;border-top:1px solid var(--line);margin-top:16px;padding-top:14px;color:#5f6c63;font-size:12px}.property-foot{display:flex;justify-content:space-between;align-items:center;margin-top:17px}.owner{font-size:11px;color:var(--muted)}.owner b{color:var(--site-primary)}.text-btn{border:0;background:transparent;color:var(--site-primary);font-size:12px;font-weight:800}.trust{background:#e9eee5;padding:48px 0}.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.trust-item{display:flex;gap:14px}.trust-icon{width:42px;height:42px;flex:0 0 42px;border-radius:14px;background:#fff;display:grid;place-items:center;font-size:20px}.trust-item h3{margin:2px 0 7px;font-size:15px;color:#1a3024}.trust-item p{margin:0;color:#68756b;font-size:13px;line-height:1.65}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:white;color:var(--ink)}.step span{font:italic 28px var(--site-font-heading);color:#b1844c}.step h3{margin:14px 0 8px}.step p{font-size:13px;color:var(--muted);line-height:1.7}.cta{background:var(--site-primary);color:white;border-radius:26px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:25px;margin:10px 0 58px}.cta h2{font:500 32px/1.15 var(--site-font-heading);margin:0 0 9px}.cta p{color:#d4e0d8;margin:0;font-size:13px}.footer{padding:24px 0 35px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px}.modal-backdrop{position:fixed;inset:0;background:#10201799;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal-backdrop.open{display:flex}.modal{width:min(540px,100%);max-height:90vh;overflow:auto;background:white;color:var(--ink);border-radius:22px;padding:25px;box-shadow:0 25px 80px #0003}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h2{font:500 30px var(--site-font-heading);margin:0}.close{border:0;background:#f0f2ed;border-radius:50%;width:34px;height:34px;font-size:20px}.modal p{color:var(--muted);font-size:13px;line-height:1.6}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-row{display:flex;flex-direction:column;gap:6px;margin:10px 0}.form-row label{font-size:12px;font-weight:750}.form-row input,.form-row select{padding:12px;border:1px solid var(--line);border-radius:10px;background:white;color:#1c2b22}.form-row.full{grid-column:1/-1}.notice{font-size:12px;background:#f7f3e9;padding:12px;border-radius:10px;color:#69552d}.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted);background:white;border:1px dashed var(--line);border-radius:16px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#172f23;color:white;padding:12px 18px;border-radius:999px;display:none;z-index:20;font-size:13px;box-shadow:0 10px 25px #0002}.toast.show{display:block}
+@media(max-width:850px){.nav{display:none}.hero{grid-template-columns:1fr;padding-top:22px}.hero h1{font-size:46px}.hero-visual{min-height:300px}.visual-photo{height:270px}.listing-grid{grid-template-columns:repeat(2,1fr)}.searchbox{grid-template-columns:1fr 1fr}.field:nth-child(2){border-right:0}.trust-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.cta{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.wrap{padding:0 16px}.topbar{padding:15px 0}.actions .btn:first-child{display:none}.brand{font-size:19px}.hero h1{font-size:39px}.hero{gap:25px}.searchbox{grid-template-columns:1fr}.field{border-right:0;border-bottom:1px solid var(--line)}.listing-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.property-img{height:220px}.hero-visual{padding:12px}.visual-photo{height:275px}.floating-card.right{right:16px;bottom:28px}.form-grid{grid-template-columns:1fr}.form-row.full{grid-column:auto}.footer{flex-direction:column}.cta{padding:26px}}
+.bnav{display:none}#filtBtn{display:none}
+#smartQ{border:1px solid #0002;border-radius:999px;padding:12px 16px;background:#fff;font:inherit;min-width:0}#smartBtn{white-space:nowrap;padding:12px 16px}
+.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;border-radius:12px}.gal img{flex:0 0 100%;width:100%;height:220px;object-fit:cover;scroll-snap-align:center;border-radius:12px}
+.sk{height:300px;border-radius:18px;background:linear-gradient(90deg,#ece8de 25%,#f6f3ec 50%,#ece8de 75%);background-size:200% 100%;animation:sk 1.2s infinite}@keyframes sk{to{background-position:-200% 0}}
+.tag2{position:absolute;bottom:12px;left:13px;background:#164f3a;color:#fff;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:800}
+@media(max-width:760px){.bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:8;background:#fffffff2;border-top:1px solid #0002;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));justify-content:space-around}.bnav button{border:0;background:none;font-size:11px;font-weight:700;padding:6px 10px;color:#164f3a}.bnav b{display:block;font-size:18px}body{padding-bottom:72px}#toast{bottom:90px!important}#smartBtn{font-size:13px}#filtBtn{display:inline-block;margin-bottom:10px}.fp{display:none!important}.fp.open{display:flex!important}#cmpBar{bottom:80px!important}}
+.gmain{position:relative;height:240px;border-radius:12px;overflow:hidden;cursor:zoom-in;background:#ece8de}.gmain img{width:100%;height:100%;object-fit:cover}.gcount{position:absolute;right:8px;bottom:8px;background:#000a;color:#fff;font-size:11px;padding:4px 8px;border-radius:99px}
+.gthumbs{display:flex;gap:6px;overflow-x:auto;margin-top:8px}.gthumbs img{width:64px;height:48px;object-fit:cover;border-radius:8px;opacity:.6;border:2px solid transparent;cursor:pointer;flex:0 0 auto}.gthumbs img.on{opacity:1;border-color:#164f3a}
+#lb{display:none;position:fixed;inset:0;background:#000;z-index:40;align-items:center;justify-content:center}#lb.open{display:flex}#lbImg{max-width:100%;max-height:76vh;object-fit:contain}
+#lb button{position:fixed;border:0;background:#fff3;color:#fff;font-size:26px;width:44px;height:44px;border-radius:50%}#lbClose{top:12px;right:12px}#lbPrev{left:8px;top:45%}#lbNext{right:8px;top:45%}
+#lbThumbs{position:fixed;bottom:12px;left:0;right:0;display:flex;gap:6px;justify-content:center;overflow-x:auto;padding:0 10px}#lbThumbs img{width:56px;height:42px;object-fit:cover;border-radius:6px;cursor:pointer}
+#side{position:fixed;top:0;bottom:0;left:0;width:290px;max-width:84vw;transform:translateX(-105%);transition:transform .25s;background:#fff;z-index:35;padding:20px 16px;display:flex;flex-direction:column;gap:4px;box-shadow:4px 0 30px #0003;overflow-y:auto}#side.open{transform:none}
+#sideShade{display:none;position:fixed;inset:0;background:#0006;z-index:34}#sideShade.open{display:block}
+#side button,#side a{border:0;background:none;text-align:left;font:inherit;font-weight:700;font-size:15px;padding:12px 10px;border-radius:10px;color:#164f3a;text-decoration:none;cursor:pointer}#side button:hover,#side a:hover{background:#f1f5f1}#side hr{border:0;border-top:1px solid #0002;width:100%;margin:6px 0}
+</style>
+</head>
+<body>
+<div class="root" id="app">
+  <div class="wrap">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:10px"><button class="btn" id="menuBtn" aria-label="Menu">☰</button><div class="brand"><span class="brand-mark">⌂</span> havenly<span style="color:#b1844c">.</span></div></div>
+      <nav class="nav"><a href="#homes">Find a home</a><a href="#how">How it works</a><a href="#trust">Trust & safety</a></nav>
+      <div class="actions"><button class="btn" id="listTop">List a property</button><button class="btn" id="adminBtn" style="display:none">Admin</button><button class="btn" id="accBtn" style="display:none">Account</button><button class="btn" id="myBtn" style="display:none">My dashboard</button><button class="btn primary" id="signIn">Sign in</button></div>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">A better way to find your place</div>
+          <h1>Find a place to call <em>yours.</em></h1>
+          <p>Connect with owners, landlords and agents. Discover homes and move forward with more confidence.</p>
+          <div class="searchbox" role="search">
+            <div class="field"><label for="location">LOCATION</label><input id="location" placeholder="e.g. Lekki, Lagos"></div>
+            <div class="field"><label for="intent">I WANT TO</label><select id="intent"><option value="all">Buy or rent</option><option value="sale">Buy a home</option><option value="rent">Rent a home</option><option value="shortlet">Shortlets (per night)</option></select></div>
+            <div class="field"><label for="budget">MAX BUDGET</label><select id="budget"><option value="any">Any budget</option><option value="1000000">₦1,000,000</option><option value="3000000">₦3,000,000</option><option value="100000000">₦100,000,000</option></select></div>
+            <button class="btn primary" id="searchBtn">Search ↗</button>
+          </div>
+          <p style="font-size:12px;margin-top:12px">⌁ Browse listings. Compare options. Contact the right people.</p>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-photo" role="img" aria-label="Modern home with garden">
+            <div class="caption"><strong style="font-size:18px">A home that feels right.</strong><br>Better connections. Clearer decisions.</div>
+          </div>
+          
+          <div class="floating-card right">Built around trust<strong>✓ Listings reviewed first</strong></div>
+        </div>
+      </section>
+      <section class="section" id="homes">
+        <div class="section-head"><div><div class="eyebrow">Handpicked properties</div><h2>Places worth a closer look</h2><p>Explore rentals and homes for sale.</p></div><button class="btn" id="listSection">＋ List your property</button></div>
+        <div class="filters" style="margin-bottom:20px"><button class="chip active" data-filter="all">All homes</button><button class="chip" data-filter="rent">For rent</button><button class="chip" data-filter="sale">For sale</button><button class="chip" data-filter="shortlet">Shortlets</button></div>
+        <div id="featRow"></div>
+<div class="filters" id="areas" style="margin-bottom:10px"><span style="font-size:12px;align-self:center">Popular:</span><button class="chip" data-area="Lagos">Lagos</button><button class="chip" data-area="Abuja">Abuja</button><button class="chip" data-area="Port Harcourt">Port Harcourt</button><button class="chip" data-area="Ibadan">Ibadan</button><button class="chip" data-area="Enugu">Enugu</button><button class="chip" data-area="Benin">Benin City</button></div>
+<div style="display:flex;gap:8px;margin-bottom:12px"><input id="smartQ" placeholder="Try: 3 bedroom flat in Lekki under 2 million" style="flex:1"><button class="btn primary" id="smartBtn">Smart search</button></div>
+<div class="filters" id="typeTiles" style="margin-bottom:12px"><button class="chip active" data-kind="">All</button><button class="chip" data-kind="apartment">Apartments</button><button class="chip" data-kind="house">Houses</button><button class="chip" data-kind="duplex">Duplexes</button><button class="chip" data-kind="land">Land</button><button class="chip" data-kind="commercial">Commercial</button></div>
+<button class="chip" id="filtBtn">⚙ Filters</button>
+<div class="filters fp" style="margin-bottom:16px;align-items:center">
+<select id="beds" class="chip" aria-label="Bedrooms"><option value="0">Any bedrooms</option><option value="1">1+ beds</option><option value="2">2+ beds</option><option value="3">3+ beds</option><option value="4">4+ beds</option></select>
+<select id="kind" class="chip" aria-label="Property type"><option value="">Any type</option><option>apartment</option><option>house</option><option>duplex</option><option>land</option><option>commercial</option></select>
+<select id="baths" class="chip" aria-label="Bathrooms"><option value="0">Any bathrooms</option><option value="1">1+ baths</option><option value="2">2+ baths</option><option value="3">3+ baths</option></select>
+<select id="amen" class="chip" aria-label="Amenity"><option value="">Any amenity</option><option>Water supply</option><option>Electricity</option><option>Parking</option><option>Security</option><option>Fenced</option><option>Gated estate</option><option>Furnished</option><option>Air conditioning</option></select>
+<select id="sort" class="chip" aria-label="Sort"><option value="featured">Featured first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select>
+<button class="chip" id="onlySavedBtn">♡ Favourites</button><button class="chip" id="clearAll">Clear all</button><span id="count" style="font-size:12px"></span></div>
+<div class="listing-grid" id="listingGrid"></div>
+      </section>
+      <section class="trust" id="trust">
+        <div class="wrap" style="padding:0">
+          <div class="section-head"><div><div class="eyebrow">Confidence at every step</div><h2>Property decisions, with more peace of mind.</h2><p>Designed to help reduce uncertainty—not replace your own checks.</p></div></div>
+          <div class="trust-grid">
+            <div class="trust-item"><div class="trust-icon">✓</div><div><h3>Verification-first profiles</h3><p>Identity and property-document checks can help distinguish genuine owners and agents from unverified accounts.</p></div></div>
+            <div class="trust-item"><div class="trust-icon">⌕</div><div><h3>Keep the details together</h3><p>Save listings, request viewings, ask questions and track transaction steps from one place.</p></div></div>
+            <div class="trust-item"><div class="trust-icon">₦</div><div><h3>Safer transaction workflow</h3><p>Use documented offers, receipts and a secure payment provider before releasing funds. Never rely on a listing alone.</p></div></div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="how">
+        <div class="section-head"><div><div class="eyebrow">Simple by design</div><h2>From search to signed agreement</h2></div></div>
+        <div class="steps">
+          <article class="step"><span>01</span><h3>Discover & compare</h3><p>Filter homes by location, price and purpose. Review photos, property details and who posted the listing.</p></article>
+          <article class="step"><span>02</span><h3>Connect & view</h3><p>Message the owner or agent, ask for documents and schedule a viewing before making a commitment.</p></article>
+          <article class="step"><span>03</span><h3>Agree & transact</h3><p>Record agreed terms, use a supported payment or escrow partner, and keep receipts and signed documents.</p></article>
+        </div>
+      </section>
+      <section class="cta"><div><h2>Have a property to rent or sell?</h2><p>Reach serious home seekers with a clear, detailed listing.</p></div><button class="btn gold" id="listCta">Start a listing ↗</button></section>
+    </main>
+    <footer class="footer"><div>© 2026 Havenly. Property connections made clearer.</div><div><a href="#" data-legal="privacy">Privacy</a> · <a href="#" data-legal="terms">Terms</a> · <a href="#" data-legal="rules">Listing rules</a><span id="contactLink"></span></div></footer>
+  </div>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal"><div class="modal-head"><h2 id="modalTitle">List a property</h2><button class="close" id="closeModal" aria-label="Close">×</button></div><p id="modalDescription">Share the essentials. Listings are reviewed before they appear publicly.</p>
+    <form id="propertyForm">
+      <div class="form-grid">
+        <div class="form-row"><label for="pTitle">Property title</label><input id="pTitle" required placeholder="e.g. 2-bedroom flat"></div>
+        <div class="form-row"><label for="pType">Listing type</label><select id="pType"><option value="rent">For rent</option><option value="sale">For sale</option><option value="shortlet">Shortlet (price per night)</option></select></div>
+        <div class="form-row"><label for="pPrice">Price (₦)</label><input id="pPrice" required type="number" min="1" placeholder="2500000"></div>
+        <div class="form-row"><label for="pLocation">Location</label><input id="pLocation" required placeholder="Area, city"></div>
+        <div class="form-row"><label for="pBeds">Bedrooms</label><select id="pBeds"><option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div>
+        <div class="form-row"><label for="pGuests">Max guests (shortlets)</label><input id="pGuests" type="number" min="1" max="50"></div><div class="form-row"><label for="pNights">Minimum nights (shortlets)</label><input id="pNights" type="number" min="1" max="365" value="1"></div>
+        <div class="form-row"><label for="pKind">Property type</label><select id="pKind"><option>apartment</option><option>house</option><option>duplex</option><option>land</option><option>commercial</option></select></div><div class="form-row"><label for="pBaths">Bathrooms</label><select id="pBaths"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div class="form-row full"><label>Amenities</label><div id="pAmen" style="display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Water supply">Water supply</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Electricity">Electricity</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Parking">Parking</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Security">Security</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Fenced">Fenced</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Gated estate">Gated estate</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Furnished">Furnished</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" style="width:auto" value="Air conditioning">Air conditioning</label></div></div>
+        <div class="form-row full"><label for="pPhotos">Photos (up to 4, max 3 MB each)</label><input id="pPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple></div>
+        <div class="form-row"><label for="pRole">I am a...</label><select id="pRole"><option>Property owner</option><option>Landlord</option><option>House agent</option><option>Seller</option></select></div>
+        
+      </div>
+      <div class="notice">You need to be signed in. Havenly does not process payments or hold money.</div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px"><button type="button" class="btn" id="cancelModal">Cancel</button><button class="btn primary" type="submit">Submit for review</button></div>
+    </form>
+  </div>
+</div>
+<div class="modal-backdrop" id="adminBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2>Admin</h2><button class="close" id="adminClose" aria-label="Close">×</button></div><div id="adminBody"></div></div></div>
+<div class="modal-backdrop" id="cmpBackdrop" role="dialog" aria-modal="true"><div class="modal" style="max-width:760px"><div class="modal-head"><h2>Compare homes</h2><button class="close" id="cmpClose" aria-label="Close">×</button></div><div id="cmpBody" style="overflow-x:auto"></div><button class="btn" id="cmpClear" style="margin-top:12px">Clear comparison</button></div></div>
+<button class="btn primary" id="cmpBar" style="display:none;position:fixed;right:16px;bottom:16px;z-index:9"></button>
+<div class="modal-backdrop" id="legalBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2 id="lTitle"></h2><button class="close" id="lClose" aria-label="Close">×</button></div><div id="lBody" style="font-size:14px;line-height:1.6"></div></div></div>
+<div class="modal-backdrop" id="myBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2>My dashboard</h2><button class="close" id="myClose" aria-label="Close">×</button></div><div id="myBody"></div></div></div>
+<div class="modal-backdrop" id="authBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2 id="authTitle">Log in to Havenly</h2><button class="close" id="authClose" aria-label="Close">×</button></div><div class="filters" id="authTabs" style="margin-bottom:12px"><button class="chip active" data-mode="in">Log in</button><button class="chip" data-mode="up">Create account</button></div><div class="form-grid"><div class="form-row full su" style="display:none"><label for="aName">Full name (new accounts)</label><input id="aName"></div><div class="form-row full su" style="display:none"><label for="aRole">I am a… (new accounts)</label><select id="aRole"><option value="seeker">Home seeker / tenant</option><option value="landlord">Landlord</option><option value="owner">Property owner</option><option value="seller">Property seller</option><option value="agent">House agent</option><option value="host">Shortlet / Airbnb host</option></select></div><div class="form-row full su" style="display:none"><label for="aCompany">Company or agency (optional)</label><input id="aCompany" placeholder="e.g. Prime Homes Ltd"></div><div class="form-row full em"><label for="aEmail">Email</label><input id="aEmail" type="email" autocomplete="email"></div><div class="form-row full"><label for="aPass">Password (6+ characters)</label><input id="aPass" type="password" autocomplete="current-password"></div><div class="form-row full su2" style="display:none"><label for="aPass2">Confirm password</label><input id="aPass2" type="password" autocomplete="new-password"></div><label style="display:flex;gap:6px;align-items:center;font-size:13px;margin:6px 0"><input type="checkbox" id="aShow" style="width:auto"> Show password</label></div><div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn" id="aSignUp">Create account</button><button class="btn primary" id="aSave" style="display:none">Save new password</button><button class="text-btn" id="aForgot">Forgot password?</button><button class="btn primary" id="aSignIn">Log in</button></div></div></div>
+<div class="modal-backdrop" id="detailBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2 id="dTitle"></h2><button class="close" id="dClose" aria-label="Close">×</button></div><div id="dBody"></div></div></div>
+<div id="sideShade"></div><aside id="side" aria-label="Menu"></aside>
+<div id="lb" role="dialog" aria-modal="true"><button id="lbClose" aria-label="Close">×</button><button id="lbPrev" aria-label="Previous">‹</button><img id="lbImg" alt=""><button id="lbNext" aria-label="Next">›</button><div id="lbThumbs"></div></div>
+<nav class="bnav"><button id="bnHome"><b>⌕</b>Search</button><button id="bnList"><b>＋</b>List</button><button id="bnSaved"><b>♡</b>Saved</button><button id="bnAcct"><b>◉</b>Account</button></nav>
+<div class="modal-backdrop" id="accBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2>My account</h2><button class="close" id="accClose" aria-label="Close">×</button></div><p style="font-size:12px;margin:0 0 10px">Your phone and email stay private. They are only shared when you reply to an enquiry.</p><div class="form-grid"><div class="form-row full"><label for="accName">Full name</label><input id="accName" autocomplete="name"></div><div class="form-row full"><label for="accPhone">Phone number</label><input id="accPhone" type="tel" autocomplete="tel" placeholder="e.g. 0803 123 4567"></div><div class="form-row full"><label for="accEmail">Email</label><input id="accEmail" type="email" autocomplete="email"></div><div class="form-row full"><label for="accCompany">Company or agency</label><input id="accCompany"></div><div class="form-row full"><label for="accRole">I am a…</label><select id="accRole"><option value="seeker">Home seeker / tenant</option><option value="landlord">Landlord</option><option value="owner">Property owner</option><option value="seller">Property seller</option><option value="agent">House agent</option><option value="host">Shortlet / Airbnb host</option></select></div><div class="form-row full"><label for="accPass">New password (optional)</label><input id="accPass" type="password" autocomplete="new-password"></div><div class="form-row full"><label for="accPass2">Confirm new password</label><input id="accPass2" type="password" autocomplete="new-password"></div></div><label style="display:flex;gap:6px;align-items:center;font-size:13px;margin:6px 0"><input type="checkbox" id="accShow" style="width:auto"> Show passwords</label><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="accSave">Save changes</button></div></div></div>
+<div class="modal-backdrop" id="threadBackdrop" role="dialog" aria-modal="true"><div class="modal"><div class="modal-head"><h2>Messages</h2><button class="close" id="threadClose" aria-label="Close">×</button></div><div id="threadBody" style="max-height:50vh;overflow-y:auto"></div><div style="display:flex;gap:8px;margin-top:12px"><input id="threadInput" maxlength="1000" placeholder="Write a message" style="flex:1"><button class="btn primary" id="threadSend">Send</button></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+/* JSON is the demo data layer. Replace with a real API/database for production. */
+const DEMO = [
+ {id:"HV-101",title:"Light-filled 3-bedroom terrace",type:"sale",price:78500000,location:"Lekki Phase 1, Lagos",beds:3,baths:3,area:"210 m²",role:"Verified agent",verified:true,image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",featured:true},
+ {id:"HV-102",title:"Quiet 2-bedroom apartment",type:"rent",price:2800000,location:"GRA, Benin City",beds:2,baths:2,area:"115 m²",role:"Property owner",verified:true,image:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",featured:false},
+ {id:"HV-103",title:"Modern family home with garden",type:"sale",price:112000000,location:"Wuse 2, Abuja",beds:4,baths:4,area:"320 m²",role:"Verified seller",verified:true,image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80",featured:true},
+ {id:"HV-104",title:"Neat 1-bedroom mini flat",type:"rent",price:950000,location:"Ugbowo, Benin City",beds:1,baths:1,area:"62 m²",role:"Landlord",verified:false,image:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80",featured:false},
+ {id:"HV-105",title:"Contemporary 2-bedroom duplex",type:"sale",price:46500000,location:"Gwarinpa, Abuja",beds:2,baths:3,area:"180 m²",role:"Verified agent",verified:true,image:"https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=900&q=80",featured:false},
+ {id:"HV-106",title:"Comfortable 3-bedroom bungalow",type:"rent",price:2200000,location:"Ikeja, Lagos",beds:3,baths:2,area:"160 m²",role:"Property owner",verified:true,image:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80",featured:false}
+];
+let properties=[];
+function pickStorage(){try{localStorage.setItem("hv_t","1");localStorage.removeItem("hv_t");return localStorage}catch(e){window.__hvNoStore=true;try{sessionStorage.setItem("hv_t","1");sessionStorage.removeItem("hv_t");return sessionStorage}catch(e2){const mem={};return{getItem:k=>mem[k]||null,setItem:(k,v)=>{mem[k]=v},removeItem:k=>{delete mem[k]}}}}}
+const sb=supabase.createClient("https://mkwleoxnddfvvzodcaga.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rd2xlb3huZGRmdnZ6b2RjYWdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyNjI3MjQsImV4cCI6MjEwODgzODcyNH0.0ZsYozdoJaOhDLEQJTXvb2E-MC_eMvTzo_Lq1LkegAQ",{auth:{persistSession:true,autoRefreshToken:true,storageKey:"havenly-auth",storage:pickStorage()}});
+let session=null;
+const VL={unreviewed:" — not verified",documents_reviewed:" — documents reviewed by Havenly (not physically inspected)",inspected:" — documents reviewed and physically inspected"};
+const PLACEHOLDER="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80";
+function mapRow(r){return{id:r.id,title:r.title,type:r.listing_type,price:Number(r.price),location:[r.area,r.city,r.state].filter(Boolean).join(", "),beds:r.bedrooms||0,baths:r.bathrooms||1,area:r.size_sqm?r.size_sqm+" m²":"—",role:(({landlord:"Landlord",owner:"Property owner",seller:"Seller",agent:"Agent"})[r.poster_role]||"Owner")+(r.poster_company?" · "+r.poster_company:""),verified:!!r.verified,kind:r.property_type||"",amenities:r.amenities||[],image:(r.image_urls&&r.image_urls[0])||PLACEHOLDER,featured:!!r.featured,verification:r.verification||"unreviewed",guests:r.max_guests,minNights:r.min_nights,images:r.image_urls||[]}}
+async function loadListings(){const{data,error}=await sb.from("properties").select("*").eq("status","approved").eq("available",true).order("created_at",{ascending:false});if(error){loading=false;render();toast("Couldn't load listings. Please refresh.");return}properties=data.map(mapRow);loading=false;render();renderFeatured()}
+async function submitListing(e){
+ if(!session){closeModal();openAuth();toast("Please sign in to list a property");return}
+ const{data:pf}=await sb.from("profiles").select("role,company").eq("id",session.user.id).single();
+ if(!pf||pf.role==="seeker"){toast("Your account is a home-seeker account. Create a landlord, owner, seller or agent account to list.");return}
+ const loc=document.getElementById("pLocation").value.split(",").map(x=>x.trim());
+ const files=[...document.getElementById("pPhotos").files].slice(0,4);const urls=[];
+ for(const f of files){if(f.size>3*1024*1024){toast("Each photo must be under 3 MB");return}
+  const ext=({"image/jpeg":"jpg","image/png":"png","image/webp":"webp"})[f.type];if(!ext){toast("Photos must be JPG, PNG or WebP");return}
+  const path=session.user.id+"/"+Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
+  const up=await sb.storage.from("property-images").upload(path,f,{contentType:f.type});
+  if(up.error){toast("Photo upload failed: "+up.error.message);return}
+  urls.push(sb.storage.from("property-images").getPublicUrl(path).data.publicUrl)}
+ const{error}=await sb.from("properties").insert({image_urls:urls,poster_role:pf.role,poster_company:pf.company,max_guests:parseInt(document.getElementById("pGuests").value)||null,min_nights:parseInt(document.getElementById("pNights").value)||1,property_type:document.getElementById("pKind").value,bathrooms:parseInt(document.getElementById("pBaths").value)||1,amenities:[...document.querySelectorAll("#pAmen input:checked")].map(x=>x.value),title:document.getElementById("pTitle").value.trim(),listing_type:document.getElementById("pType").value,price:Number(document.getElementById("pPrice").value),area:loc[0]||null,city:loc[1]||null,bedrooms:parseInt(document.getElementById("pBeds").value)||0});
+ if(error){toast("Could not submit: "+error.message);return}
+ closeModal();e.target.reset();toast("Submitted! Your listing will appear once reviewed.");
+}
+async function openMine(){
+ document.getElementById("myBackdrop").classList.add("open");const box=document.getElementById("myBody");box.textContent="Loading…";
+ const[L,E,O]=await Promise.all([sb.from("properties").select("*").eq("owner_id",session.user.id).order("created_at",{ascending:false}),sb.from("enquiries").select("*,properties(title)").order("created_at",{ascending:false}).limit(60),sb.from("offers").select("*,properties(title)").order("created_at",{ascending:false}).limit(60)]);
+ const data=L.data,error=L.error;
+ if(error){box.textContent="Could not load your listings: "+error.message;return}
+ let html=data.length?"":"<p>You haven't listed anything yet.</p>";
+ html+=data.map(r=>`<div style="border:1px solid #0002;border-radius:12px;padding:12px;margin-bottom:10px"><b>${escapeHtml(r.title)}</b><div style="font-size:13px">${formatNaira(r.price)} · ${r.listing_type==="rent"?"For rent":"For sale"}</div><div style="font-size:12px;margin:6px 0">Status: <b>${r.status==="approved"?"Live":r.status==="pending"?"Awaiting review":"Rejected"}</b> · ${r.available?"Available":"Marked unavailable"}</div><button class="btn" data-avail="${r.id}" data-to="${!r.available}">${r.available?"Mark unavailable":"Mark available"}</button> <button class="btn" data-del="${r.id}">Delete</button></div>`).join("");
+ html+=enquiryHtml(E.data||[],session.user.id)+offerHtml(O.data||[],session.user.id);box.innerHTML=html}
+function qCard(q,owner){return `<div style="border:1px solid #0002;border-radius:12px;padding:12px;margin-bottom:10px"><b>${q.kind==="inspection"?"Inspection request":q.kind==="booking"?"Booking request":"Enquiry"}</b> · ${escapeHtml(q.properties?q.properties.title:"")}<div style="font-size:13px;margin:4px 0">${escapeHtml(q.message||"")}</div>${owner?`<div style="font-size:13px">Contact: <b>${escapeHtml(q.contact)}</b></div>`:""}${q.check_in?`<div style="font-size:12px">Stay: ${escapeHtml(q.check_in)} to ${escapeHtml(q.check_out||"")}</div>`:""}${q.preferred_date?`<div style="font-size:12px">Preferred date: ${escapeHtml(q.preferred_date)}</div>`:""}${!owner&&(q.reply_contact||q.reply_message)?`<div style="font-size:13px;background:#f1f7f1;padding:8px;border-radius:8px;margin-top:6px">Lister reply: ${escapeHtml(q.reply_message||"")} ${q.reply_contact?"· Contact: <b>"+escapeHtml(q.reply_contact)+"</b>":""}</div>`:""}<div style="font-size:12px;margin:6px 0">Status: <b>${escapeHtml(q.status)}</b></div><button class="btn" data-thread="${q.id}">Messages</button> ${owner?`<button class="btn" data-q="${q.id}" data-st="accepted">Accept</button> <button class="btn" data-q="${q.id}" data-st="declined">Decline</button> <button class="btn" data-q="${q.id}" data-st="done">Mark done</button>`:""}</div>`}
+async function replyFields(q){const o={status:q.dataset.st};if(o.status==="accepted"){const c=prompt("Phone or WhatsApp number to share with this person (shown only to them):",myPhone||"");if(c&&c.trim().length>=5)o.reply_contact=c.trim().slice(0,120);const m=prompt("Optional message for them (e.g. available Saturday 11am):");if(m&&m.trim())o.reply_message=m.trim().slice(0,500)}return o}
+function enquiryHtml(rows,uid){
+ const recv=rows.filter(q=>q.seeker_id!==uid),mine=rows.filter(q=>q.seeker_id===uid);let h="";
+ if(recv.length)h+="<h3 style='margin:16px 0 8px'>Enquiries received</h3>"+recv.map(q=>qCard(q,true)).join("");
+ if(mine.length)h+="<h3 style='margin:16px 0 8px'>Enquiries I sent</h3>"+mine.map(q=>qCard(q,false)).join("");
+ return h}
+let authMode="in";
+function setAuthMode(m){authMode=m;
+ const show=(sel,v)=>document.querySelectorAll(sel).forEach(x=>x.style.display=v?"":"none");
+ show("#authBackdrop .su",m==="up");show("#authBackdrop .su2",m==="up"||m==="reset");show("#authBackdrop .em",m!=="reset");show("#authTabs",m!=="reset");
+ document.getElementById("aSignUp").style.display=m==="up"?"":"none";document.getElementById("aSignIn").style.display=m==="in"?"":"none";document.getElementById("aForgot").style.display=m==="in"?"":"none";document.getElementById("aSave").style.display=m==="reset"?"":"none";
+ document.getElementById("authTitle").textContent=m==="up"?"Create your Havenly account":m==="reset"?"Choose a new password":"Log in to Havenly";
+ document.getElementById("aPass").autocomplete=m==="in"?"current-password":"new-password";
+ document.getElementById("aPass").value="";document.getElementById("aPass2").value="";
+ document.querySelectorAll("#authTabs .chip").forEach(x=>x.classList.toggle("active",x.dataset.mode===m))}
+function openAuth(){setAuthMode("in");document.getElementById("authBackdrop").classList.add("open")}
+function recoverPw(){openAuth();setAuthMode("reset")}
+function closeAuth(){document.getElementById("authBackdrop").classList.remove("open")}
+async function doAuth(mode){
+ const email=document.getElementById("aEmail").value.trim(),password=document.getElementById("aPass").value;
+ if(!email||password.length<6){toast("Enter your email and a password of 6+ characters");return}
+ if(mode==="up"&&password!==document.getElementById("aPass2").value){toast("The two passwords don't match");return}
+ const r=mode==="up"?await sb.auth.signUp({email,password,options:{data:{full_name:document.getElementById("aName").value.trim(),role:document.getElementById("aRole").value,company:document.getElementById("aCompany").value.trim()}}}):await sb.auth.signInWithPassword({email,password});
+ if(r.error){toast(/invalid login/i.test(r.error.message)?"Wrong email or password. New here? Tap Create account.":r.error.message);return}
+ closeAuth();toast(mode==="up"&&!r.data.session?"Check your email to confirm your account":"Welcome to Havenly");
+}
+const formatNaira = n => "₦" + Number(n).toLocaleString("en-NG");
+let activeFilter = "all";
+let loading=true;let saved = new Set();let onlySaved=false;
+const grid = document.getElementById("listingGrid");
+function render(){
+ const location = document.getElementById("location").value.trim().toLowerCase();
+ const intent = document.getElementById("intent").value;
+ const budget = document.getElementById("budget").value;
+ const filtered = properties.filter(p =>
+   (activeFilter==="all" || p.type===activeFilter) &&
+   (intent==="all" || p.type===intent) &&
+   (!location || p.location.toLowerCase().includes(location)) &&
+   (budget==="any" || p.price<=Number(budget)) &&
+   (p.beds>=Number(document.getElementById("beds").value)) &&
+   (p.baths>=Number(document.getElementById("baths").value)) &&
+   (!smartMax || p.price<=smartMax) &&
+   (!document.getElementById("kind").value || p.kind===document.getElementById("kind").value) &&
+   (!document.getElementById("amen").value || (p.amenities||[]).includes(document.getElementById("amen").value)) &&
+   (!onlySaved || saved.has(p.id))
+ );
+ const sort=document.getElementById("sort").value;
+ filtered.sort((a,b)=>sort==="low"?a.price-b.price:sort==="high"?b.price-a.price:(b.featured-a.featured));
+ document.getElementById("count").textContent=filtered.length+" result"+(filtered.length===1?"":"s");
+ document.getElementById("filtBtn").textContent="⚙ Filters"+(()=>{const n=["beds","baths","kind","amen"].filter(i=>{const v=document.getElementById(i).value;return v&&v!=="0"}).length+(smartMax?1:0);return n?" ("+n+")":""})();
+ grid.innerHTML = "";if(loading){grid.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';return}
+ if(!filtered.length){grid.innerHTML='<div class="empty">No matching homes yet. Try another area, a higher budget, or tap Clear all.<br><br><button class="btn" id="emptyClear">Clear filters</button> <button class="btn primary" id="emptyList">List a property here</button></div>';return}
+ filtered.forEach(p=>{
+  const article=document.createElement("article"); article.className="property";
+  article.innerHTML=`<div class="property-img" style="background-image:url('${p.image}')"><span class="tag">${p.type==="rent"?"FOR RENT":p.type==="shortlet"?"SHORTLET":"FOR SALE"}</span>${p.featured?'<span class="tag2">★ FEATURED</span>':p.verified?'<span class="tag2">✓ VERIFIED</span>':""}<button class="heart" aria-label="Save property" data-save="${p.id}">${saved.has(p.id)?"♥":"♡"}</button></div>
+  <div class="property-body"><div class="price">${formatNaira(p.price)} <small>${priceSuffix(p)}</small></div><h3>${escapeHtml(p.title)}</h3><div class="location">⌖ ${escapeHtml(p.location)}</div><div class="specs"><span>▦ ${p.beds} beds</span><span>◫ ${p.baths} baths</span><span>↔ ${p.area}</span></div><div class="property-foot"><div class="owner">${p.verification==="inspected"?"✓✓ Inspected · ":p.verified?"✓ Documents reviewed · ":""}<b>${escapeHtml(p.role)}</b></div><button class="text-btn" data-contact="${p.id}">View details ↗</button></div></div>`;
+  grid.appendChild(article);
+ });
+}
+let curProp=null;
+function priceSuffix(p){return p.type==="rent"?" / year":p.type==="shortlet"?" / night":"asking price"}
+function patchShortlet(p){
+ if(p.type!=="shortlet")return;const box=document.getElementById("dBody");
+ const ins=box.querySelector('[data-send="inspection"]');if(ins){ins.dataset.send="booking";ins.textContent="Request booking"}
+ const off=box.querySelector("[data-offer]");if(off)off.remove();
+ const lbl=box.querySelector('label[for="eDate"]');if(lbl)lbl.textContent="Check-in date";
+ document.getElementById("eDate").parentElement.insertAdjacentHTML("afterend",'<div class="form-row full"><label for="eOut">Check-out date</label><input id="eOut" type="date"></div>');
+ const info=document.createElement("p");info.style.fontSize="13px";info.textContent=[p.guests?"Up to "+p.guests+" guests":"",p.minNights?"Minimum "+p.minNights+" night(s)":"","Confirm availability and the host's identity before paying anyone."].filter(Boolean).join(" · ");
+ box.insertBefore(info,document.getElementById("enqBox"))}
+let curImgs=[],gIdx=0;
+function showDetails(p){curProp=p;gIdx=0;curImgs=(p.images&&p.images.length?p.images:[p.image]);
+ document.getElementById("dTitle").textContent=p.title;
+ document.getElementById("dBody").innerHTML=`<div class="gmain" id="gmain"><img id="gmainImg" src="${escapeHtml(curImgs[0])}" alt=""><span class="gcount">${curImgs.length>1?"1/"+curImgs.length+" · tap to enlarge":"tap to enlarge"}</span></div>${curImgs.length>1?`<div class="gthumbs" id="gthumbs">${curImgs.map((u,i)=>`<img src="${escapeHtml(u)}" data-gi="${i}" class="${i?"":"on"}" alt="">`).join("")}</div>`:""}<div class="price" style="margin-top:14px">${formatNaira(p.price)} <small>${priceSuffix(p)}</small></div><div class="location">⌖ ${escapeHtml(p.location)}</div><div class="specs" style="margin:10px 0"><span>▦ ${p.beds} beds</span><span>◫ ${p.baths} baths</span><span>↔ ${p.area}</span></div><p>Listed by <b>${escapeHtml(p.role)}</b>${VL[p.verification]||VL.unreviewed}. Always inspect in person before paying anything.</p><div id="enqBox" style="margin-top:12px"><div class="form-row full"><label for="eContact">Your phone or email (shared only with this lister)</label><input id="eContact"></div><div class="form-row full"><label for="eMsg">Message</label><textarea id="eMsg" rows="3" maxlength="1000" style="width:100%"></textarea></div><div class="form-row full"><label for="eDate">Preferred inspection date (for inspection requests)</label><input id="eDate" type="date"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn primary" data-send="enquiry">Send enquiry</button><button class="btn" data-send="inspection">Request inspection</button><button class="btn" data-offer="1">Make an offer</button><button class="btn" data-cmp="1">＋ Compare</button><button class="text-btn" data-report="1">Report listing</button></div></div><div class="notice" style="margin-top:12px">Inspect in person before paying anyone. Havenly does not hold or process money.</div>`;
+ document.getElementById("detailBackdrop").classList.add("open");patchShortlet(p);prefillContact();
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function toast(message){const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
+function openModal(){document.getElementById("modalBackdrop").classList.add("open")}
+function closeModal(){document.getElementById("modalBackdrop").classList.remove("open")}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));render()}));
+document.getElementById("searchBtn").addEventListener("click",()=>{activeFilter="all";document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));render();document.getElementById("homes").scrollIntoView({behavior:"smooth"})});
+document.getElementById("location").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();document.getElementById("searchBtn").click()}});
+["intent","budget"].forEach(id=>document.getElementById(id).addEventListener("change",render));
+["listTop","listSection","listCta"].forEach(id=>document.getElementById(id).addEventListener("click",openModal));
+document.getElementById("signIn").addEventListener("click",()=>{session?sb.auth.signOut():openAuth()});
+document.getElementById("closeModal").addEventListener("click",closeModal);document.getElementById("cancelModal").addEventListener("click",closeModal);
+document.getElementById("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
+grid.addEventListener("click",e=>{
+ const save=e.target.closest("[data-save]");if(save){const id=save.dataset.save;toggleFav(id);return}
+ const contact=e.target.closest("[data-contact]");if(contact){const p=properties.find(x=>x.id===contact.dataset.contact);showDetails(p)}
+});
+document.getElementById("propertyForm").addEventListener("submit",e=>{
+ e.preventDefault();return submitListing(e);
+ const p={id:"HV-"+(100+properties.length+1),title:document.getElementById("pTitle").value,type:document.getElementById("pType").value,price:Number(document.getElementById("pPrice").value),location:document.getElementById("pLocation").value,beds:parseInt(document.getElementById("pBeds").value)||0,baths:1,area:"Details pending",role:document.getElementById("pRole").value,verified:false,image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",featured:false};
+ properties.unshift(p);closeModal();e.target.reset();activeFilter="all";document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));render();document.getElementById("homes").scrollIntoView({behavior:"smooth"});toast("Demo listing added locally. It is not published online.");
+});
+/* Expose a JSON export for developers in the browser console. */
+window.HAVENLY_DEMO_JSON = () => JSON.stringify(properties,null,2);
+document.getElementById("dClose").addEventListener("click",()=>document.getElementById("detailBackdrop").classList.remove("open"));
+document.getElementById("detailBackdrop").addEventListener("click",e=>{if(e.target.id==="detailBackdrop")e.currentTarget.classList.remove("open")});
+["beds","sort","kind","baths","amen"].forEach(id=>document.getElementById(id).addEventListener("change",render));
+document.getElementById("onlySavedBtn").addEventListener("click",e=>{onlySaved=!onlySaved;e.currentTarget.classList.toggle("active",onlySaved);render()});
+document.getElementById("clearAll").addEventListener("click",()=>{["location"].forEach(i=>document.getElementById(i).value="");document.getElementById("intent").value="all";document.getElementById("budget").value="any";smartMax=null;document.getElementById("smartQ").value="";document.getElementById("beds").value="0";document.getElementById("baths").value="0";document.getElementById("kind").value="";document.getElementById("amen").value="";document.getElementById("sort").value="featured";onlySaved=false;document.getElementById("onlySavedBtn").classList.remove("active");activeFilter="all";document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));render()});
+document.getElementById("authClose").addEventListener("click",closeAuth);
+document.getElementById("aSignIn").addEventListener("click",()=>doAuth("in"));
+document.getElementById("aSignUp").addEventListener("click",()=>doAuth("up"));
+document.getElementById("authTabs").addEventListener("click",e=>{const b=e.target.closest("[data-mode]");if(b)setAuthMode(b.dataset.mode)});
+document.getElementById("aPass").addEventListener("keydown",e=>{if(e.key==="Enter"){authMode==="reset"?document.getElementById("aSave").click():doAuth(authMode)}});
+document.getElementById("aPass2").addEventListener("keydown",e=>{if(e.key==="Enter"){authMode==="reset"?document.getElementById("aSave").click():doAuth(authMode)}});
+document.getElementById("aShow").addEventListener("change",e=>{const t=e.target.checked?"text":"password";document.getElementById("aPass").type=t;document.getElementById("aPass2").type=t});
+document.getElementById("aSave").addEventListener("click",async()=>{const a=document.getElementById("aPass").value,b=document.getElementById("aPass2").value;if(a.length<6){toast("Use 6 or more characters");return}if(a!==b){toast("The two passwords don't match");return}const{error}=await sb.auth.updateUser({password:a});if(error){toast(error.message);return}closeAuth();toast("Password updated. You're signed in.")});
+document.getElementById("aForgot").addEventListener("click",async()=>{const email=document.getElementById("aEmail").value.trim();if(!email){toast("Enter your email first, then tap Forgot password");return}const{error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.href.split("#")[0]});toast(error?error.message:"Password reset link sent. Check your email.")});
+document.getElementById("signIn").textContent="…";
+if(window.__hvNoStore)setTimeout(()=>toast("Your browser is blocking saved logins, so you will be signed out on refresh. Turn off private mode or allow site data."),1500);
+sb.auth.onAuthStateChange((_ev,s)=>{if(_ev==="PASSWORD_RECOVERY")setTimeout(recoverPw,300);session=s;document.getElementById("myBtn").style.display=s?"":"none";document.getElementById("accBtn").style.display=s?"":"none";setTimeout(()=>{checkAdmin();loadMe();loadFavs()},0);document.getElementById("signIn").textContent=s?"Sign out":"Sign in"});
+sb.auth.getSession().then(({data})=>{session=data.session;document.getElementById("myBtn").style.display=session?"":"none";document.getElementById("accBtn").style.display=session?"":"none";setTimeout(()=>{checkAdmin();loadMe();loadFavs()},0);document.getElementById("signIn").textContent=session?"Sign out":"Sign in"});
+function guard(fn,boxId){return async()=>{const box=document.getElementById(boxId);let done=false;const t=setTimeout(()=>{if(!done)box.textContent="Still loading… check your internet connection, then close this and try again."},12000);try{await fn()}catch(err){box.textContent="Something went wrong: "+((err&&err.message)||err)}done=true;clearTimeout(t)}}
+document.getElementById("myBtn").addEventListener("click",guard(openMine,"myBody"));
+document.getElementById("myClose").addEventListener("click",()=>document.getElementById("myBackdrop").classList.remove("open"));
+document.getElementById("myBody").addEventListener("click",async e=>{
+ const th=e.target.closest("[data-thread]");if(th){openThread(th.dataset.thread);return}
+ const o=e.target.closest("[data-of]");
+ if(o){const upd={status:o.dataset.of};if(upd.status==="countered"){const v=Number((prompt("Your counter amount in ₦:")||"").replace(/[^\d.]/g,""));if(!(v>0))return;upd.counter_amount=v}
+  const{error}=await sb.from("offers").update(upd).eq("id",o.dataset.oid);if(error){toast(error.message);return}openMine();return}
+ const q=e.target.closest("[data-q]");
+ if(q){const{error}=await sb.from("enquiries").update(await replyFields(q)).eq("id",q.dataset.q);if(error){toast(error.message);return}openMine();return}
+ const a=e.target.closest("[data-avail]"),d=e.target.closest("[data-del]");
+ if(a){const{error}=await sb.from("properties").update({available:a.dataset.to==="true"}).eq("id",a.dataset.avail);if(error){toast(error.message);return}openMine();loadListings()}
+ if(d&&confirm("Delete this listing permanently?")){const{error}=await sb.from("properties").delete().eq("id",d.dataset.del);if(error){toast(error.message);return}openMine();loadListings()}
+});
+const CONTACT_EMAIL="";
+const LEGAL={
+privacy:["Privacy policy","<p>We collect the details you give us: name, email, role, company or agency, listing details and photos, and enquiries you send (including the phone or email you add to them).</p><p>Your enquiry contact details are visible only to you and the lister you contacted. Listings you submit become public once approved. We do not sell your data.</p><p>Data is stored with our database provider, Supabase. To correct or delete your data, contact us using the link below.</p>"],
+terms:["Terms of use","<p>Havenly helps people discover properties and contact listers. We are not a party to any rental or sale and do not hold money, deposits or documents.</p><p>Listings are posted by users and reviewed before publication, but a listing being live does not mean it is verified or guaranteed. Always inspect in person and confirm ownership before paying anyone.</p><p>We may remove listings or accounts that break the listing rules. Havenly is provided as is, and we are not liable for losses from dealings between users.</p>"],
+rules:["Listing rules","<p>List only properties you own or are authorised to list. Details, prices and photos must be accurate and current.</p><p>No duplicate listings, fake photos, advance-fee requests or misleading offers. Mark a property unavailable once it is taken.</p><p>Use the Report listing button on any suspicious listing. Fraudulent listings are removed and accounts may be closed.</p>"]};
+document.querySelectorAll("[data-legal]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const L=LEGAL[a.dataset.legal];document.getElementById("lTitle").textContent=L[0];document.getElementById("lBody").innerHTML=L[1];document.getElementById("legalBackdrop").classList.add("open")}));
+document.getElementById("lClose").addEventListener("click",()=>document.getElementById("legalBackdrop").classList.remove("open"));
+if(CONTACT_EMAIL)document.getElementById("contactLink").innerHTML=' · <a href="mailto:'+CONTACT_EMAIL+'">Contact</a>';
+document.getElementById("dBody").addEventListener("click",async e=>{
+ const b=e.target.closest("[data-send],[data-report]");if(!b)return;
+ if(!session){document.getElementById("detailBackdrop").classList.remove("open");openAuth();toast("Please sign in first");return}
+ if(b.dataset.report){const reason=prompt("Why are you reporting this listing? (fraud, wrong details, already rented...)");if(!reason||reason.trim().length<3)return;
+  const{error}=await sb.from("reports").insert({property_id:curProp.id,reason:reason.trim().slice(0,500)});toast(error?(error.code==="23505"?"You already reported this listing":error.message):"Thanks, we'll review this listing");return}
+ const contact=document.getElementById("eContact").value.trim();if(contact.length<5){toast("Add a phone number or email so the lister can reply");return}
+ const kind=b.dataset.send,date=document.getElementById("eDate").value||null;
+ const outD=(document.getElementById("eOut")||{}).value||null;
+ if(kind==="inspection"&&!date){toast("Pick a preferred inspection date");return}
+ if(kind==="booking"&&(!date||!outD||outD<=date)){toast("Pick a check-in date and a later check-out date");return}
+ const{error}=await sb.from("enquiries").insert({property_id:curProp.id,kind,contact,message:document.getElementById("eMsg").value.trim()||null,preferred_date:kind==="booking"?null:date,check_in:kind==="booking"?date:null,check_out:kind==="booking"?outD:null});
+ if(error){toast(error.message.includes("row-level")?"You can't send an enquiry on this listing":error.message);return}
+ toast(kind==="inspection"?"Inspection request sent":kind==="booking"?"Booking request sent":"Enquiry sent");document.getElementById("detailBackdrop").classList.remove("open")});
+async function checkAdmin(){const b=document.getElementById("adminBtn");if(!session){b.style.display="none";return}const{data}=await sb.from("admins").select("user_id").maybeSingle();b.style.display=data?"":"none"}
+async function openAdmin(){
+ document.getElementById("adminBackdrop").classList.add("open");const box=document.getElementById("adminBody");box.textContent="Loading…";
+ const[l,r,U]=await Promise.all([sb.from("properties").select("*").order("created_at",{ascending:false}).limit(60),sb.from("reports").select("*,properties(title)").order("created_at",{ascending:false}).limit(30),sb.from("profiles").select("full_name,role,company").order("created_at",{ascending:false}).limit(50)]);
+ if(l.error){box.textContent="Could not load: "+l.error.message;return}
+ const us=U.data||[];const pend=l.data.filter(x=>x.status==="pending"),rest=l.data.filter(x=>x.status!=="pending"),reps=r.data||[];
+ const row=x=>`<div style="border:1px solid #0002;border-radius:12px;padding:12px;margin-bottom:10px"><b>${escapeHtml(x.title)}</b><div style="font-size:12px">${formatNaira(Number(x.price))} · ${escapeHtml([x.area,x.city].filter(Boolean).join(", "))} · ${escapeHtml((x.poster_role||"")+" "+(x.poster_company||""))}</div><div style="font-size:12px;margin:6px 0">Status: <b>${escapeHtml(x.status)}</b>${x.verification&&x.verification!=="unreviewed"?" · "+escapeHtml(x.verification.replace("_"," ")):""}${x.featured?" · ★ Featured":""}</div><button class="btn" data-ad="approved" data-id="${x.id}">Approve</button> <button class="btn" data-ad="rejected" data-id="${x.id}">Reject</button> <div style="margin-top:6px"><button class="btn" data-lvl="unreviewed" data-id="${x.id}">Unreviewed</button> <button class="btn" data-lvl="documents_reviewed" data-id="${x.id}">Docs reviewed</button> <button class="btn" data-lvl="inspected" data-id="${x.id}">Inspected</button></div><div style="margin-top:6px"><button class="btn" data-feat="${!x.featured}" data-id="${x.id}">${x.featured?"Remove featured":"Make featured"}</button> <button class="btn" data-rm="1" data-id="${x.id}">Delete</button></div></div>`;
+ box.innerHTML="<h3>Awaiting review ("+pend.length+")</h3>"+(pend.map(row).join("")||"<p style='font-size:13px'>Nothing waiting.</p>")+"<h3 style='margin-top:16px'>Reports ("+reps.length+")</h3>"+(reps.map(q=>`<div style="border:1px solid #0002;border-radius:12px;padding:12px;margin-bottom:10px"><b>${escapeHtml(q.properties?q.properties.title:"")}</b><div style="font-size:13px">${escapeHtml(q.reason)}</div></div>`).join("")||"<p style='font-size:13px'>No reports.</p>")+"<h3 style='margin-top:16px'>All other listings</h3>"+rest.map(row).join("")+"<h3 style='margin-top:16px'>Users ("+us.length+")</h3>"+us.map(u=>"<div style='font-size:13px;padding:4px 0'>"+escapeHtml((u.full_name||"(no name)")+" · "+u.role+(u.company?" · "+u.company:""))+"</div>").join("")}
+document.getElementById("adminBtn").addEventListener("click",guard(openAdmin,"adminBody"));
+document.getElementById("adminClose").addEventListener("click",()=>document.getElementById("adminBackdrop").classList.remove("open"));
+document.getElementById("adminBody").addEventListener("click",async e=>{
+ const a=e.target.closest("[data-ad]"),v=e.target.closest("[data-lvl]"),f=e.target.closest("[data-feat]"),d=e.target.closest("[data-rm]");if(!a&&!v&&!f&&!d)return;
+ if(d){if(!confirm("Delete this listing permanently?"))return;const{error}=await sb.from("properties").delete().eq("id",d.dataset.id);if(error){toast(error.message);return}openAdmin();loadListings();return}
+ const upd=a?{status:a.dataset.ad}:v?{verification:v.dataset.lvl,verified:v.dataset.lvl!=="unreviewed"}:{featured:f.dataset.feat==="true"};const id=(a||v||f).dataset.id;
+ const{error}=await sb.from("properties").update(upd).eq("id",id);if(error){toast(error.message);return}openAdmin();loadListings()});
+let cmp=[];
+function cmpUpdate(){const b=document.getElementById("cmpBar");b.style.display=cmp.length?"":"none";b.textContent="Compare ("+cmp.length+")"}
+document.getElementById("dBody").addEventListener("click",e=>{const c=e.target.closest("[data-cmp]");if(!c)return;
+ if(cmp.includes(curProp.id)){cmp=cmp.filter(x=>x!==curProp.id);toast("Removed from compare")}else if(cmp.length>=3)toast("You can compare up to 3 homes");else{cmp.push(curProp.id);toast("Added to compare")}cmpUpdate()});
+document.getElementById("cmpBar").addEventListener("click",()=>{
+ if(cmp.length<2){toast("Add at least 2 homes to compare");return}
+ const list=cmp.map(id=>properties.find(p=>p.id===id)).filter(Boolean);
+ const rows=[["Price",p=>formatNaira(p.price)+(p.type==="rent"?" / year":p.type==="shortlet"?" / night":"")],["Type",p=>p.kind||"—"],["Location",p=>p.location],["Bedrooms",p=>p.beds],["Bathrooms",p=>p.baths],["Size",p=>p.area],["Amenities",p=>(p.amenities||[]).join(", ")||"—"],["Listed by",p=>p.role],["Verified",p=>p.verified?"Yes":"No"]];
+ document.getElementById("cmpBody").innerHTML="<table style='width:100%;border-collapse:collapse;font-size:13px'><tr><th></th>"+list.map(p=>"<th style='text-align:left;padding:6px;border-bottom:1px solid #0002'>"+escapeHtml(p.title)+"</th>").join("")+"</tr>"+rows.map(r=>"<tr><td style='padding:6px;font-weight:700'>"+r[0]+"</td>"+list.map(p=>"<td style='padding:6px;border-bottom:1px solid #0001'>"+escapeHtml(String(r[1](p)))+"</td>").join("")+"</tr>").join("")+"</table>";
+ document.getElementById("cmpBackdrop").classList.add("open")});
+document.getElementById("cmpClose").addEventListener("click",()=>document.getElementById("cmpBackdrop").classList.remove("open"));
+document.getElementById("cmpClear").addEventListener("click",()=>{cmp=[];cmpUpdate();document.getElementById("cmpBackdrop").classList.remove("open")});
+document.getElementById("typeTiles").addEventListener("click",e=>{const b=e.target.closest("[data-kind]");if(!b)return;document.getElementById("kind").value=b.dataset.kind;document.querySelectorAll("#typeTiles .chip").forEach(x=>x.classList.toggle("active",x===b));render()});
+function oCard(o,owner){const st=o.status;return `<div style="border:1px solid #0002;border-radius:12px;padding:12px;margin-bottom:10px"><b>Offer: ${formatNaira(Number(o.amount))}</b> · ${escapeHtml(o.properties?o.properties.title:"")}<div style="font-size:13px;margin:4px 0">${escapeHtml(o.message||"")}</div>${o.counter_amount?`<div style="font-size:13px">Counter-offer: <b>${formatNaira(Number(o.counter_amount))}</b></div>`:""}<div style="font-size:12px;margin:6px 0">Status: <b>${escapeHtml(st)}</b> · non-binding</div>${owner&&st==="pending"?`<button class="btn" data-of="accepted" data-oid="${o.id}">Accept</button> <button class="btn" data-of="countered" data-oid="${o.id}">Counter</button> <button class="btn" data-of="declined" data-oid="${o.id}">Decline</button>`:""}${!owner&&st==="countered"?`<button class="btn" data-of="accepted" data-oid="${o.id}">Accept counter</button> `:""}${!owner&&(st==="pending"||st==="countered")?`<button class="btn" data-of="withdrawn" data-oid="${o.id}">Withdraw</button>`:""}</div>`}
+function offerHtml(rows,uid){
+ const recv=rows.filter(o=>o.buyer_id!==uid),mine=rows.filter(o=>o.buyer_id===uid);let h="";
+ if(recv.length)h+="<h3 style='margin:16px 0 8px'>Offers received</h3>"+recv.map(o=>oCard(o,true)).join("");
+ if(mine.length)h+="<h3 style='margin:16px 0 8px'>Offers I made</h3>"+mine.map(o=>oCard(o,false)).join("");
+ return h}
+let curThread=null;
+async function openThread(id){curThread=id;document.getElementById("threadBackdrop").classList.add("open");const box=document.getElementById("threadBody");box.textContent="Loading…";
+ const{data,error}=await sb.from("messages").select("*").eq("enquiry_id",id).order("created_at");
+ if(error){box.textContent="Could not load messages.";return}
+ box.innerHTML=data.length?data.map(m=>{const me=m.sender_id===session.user.id;return `<div style="margin:6px 0;text-align:${me?"right":"left"}"><span style="display:inline-block;background:${me?"#e3f1e6":"#eee"};padding:8px 12px;border-radius:12px;max-width:85%;font-size:14px">${escapeHtml(m.body)}</span></div>`}).join(""):"<p style='font-size:13px'>No messages yet. Say hello.</p>";box.scrollTop=box.scrollHeight}
+document.getElementById("threadSend").addEventListener("click",async()=>{const i=document.getElementById("threadInput"),t=i.value.trim();if(!t)return;const{error}=await sb.from("messages").insert({enquiry_id:curThread,body:t.slice(0,1000)});if(error){toast(error.message);return}i.value="";openThread(curThread)});
+document.getElementById("threadClose").addEventListener("click",()=>document.getElementById("threadBackdrop").classList.remove("open"));
+document.getElementById("dBody").addEventListener("click",async e=>{const b=e.target.closest("[data-offer]");if(!b)return;
+ if(!session){document.getElementById("detailBackdrop").classList.remove("open");openAuth();toast("Please sign in first");return}
+ const a=Number((prompt("Your offer amount in ₦ (non-binding):")||"").replace(/[^\d.]/g,""));if(!(a>0))return;
+ const m=prompt("Optional message to the lister:")||"";
+ const{error}=await sb.from("offers").insert({property_id:curProp.id,amount:a,message:m.trim().slice(0,500)||null});
+ if(error){toast(error.message.includes("row-level")?"You can't make an offer on this listing":error.message);return}
+ toast("Offer sent. It is non-binding until you both agree in writing.");document.getElementById("detailBackdrop").classList.remove("open")});
+let smartMax=null;
+function parseMoney(t){const m=t.match(/(?:under|below|max|less than|up to|within|budget(?: of)?)\s*₦?\s*([\d.,]+)\s*(million|mil|m|k|thousand|billion|b)?/i);if(!m)return null;let n=parseFloat(m[1].replace(/,/g,""));const u=(m[2]||"").toLowerCase();if(u==="million"||u==="mil"||u==="m")n*=1e6;else if(u==="k"||u==="thousand")n*=1e3;else if(u==="billion"||u==="b")n*=1e9;return isNaN(n)?null:n}
+function smartSearch(){
+ const t=document.getElementById("smartQ").value.trim();if(!t)return;const low=t.toLowerCase();
+ const set=(id,v)=>{document.getElementById(id).value=v};
+ set("beds","0");set("baths","0");set("kind","");set("amen","");set("intent","all");set("location","");
+ const b=low.match(/(\d+)\s*-?\s*(?:bed|bedroom|br)/);if(b)set("beds",String(Math.min(+b[1],4)));
+ const kinds={apartment:/\b(flat|flats|apartment|apartments)\b/,house:/\b(house|houses|bungalow|detached)\b/,duplex:/\bduplex\b/,land:/\b(land|plot)\b/,commercial:/\b(commercial|shop|office|warehouse)\b/};
+ for(const k in kinds)if(kinds[k].test(low))set("kind",k);
+ if(/\b(rent|rental|lease|to let)\b/.test(low))set("intent","rent");else if(/\b(buy|sale|purchase)\b/.test(low))set("intent","sale");
+ const am={"Parking":/parking/,"Security":/security/,"Furnished":/furnished/,"Water supply":/water/,"Electricity":/electricity/,"Fenced":/fenced/,"Gated estate":/gated/,"Air conditioning":/\bac\b|air.?con/};
+ for(const k in am)if(am[k].test(low))set("amen",k);
+ smartMax=parseMoney(t);
+ const loc=t.match(/\b(?:in|at|near|around)\s+([A-Za-z][A-Za-z\s,.-]*?)(?=\s+(?:under|below|for|with|max|less|up|within|budget)\b|$)/i);if(loc)set("location",loc[1].trim());
+ document.querySelectorAll("#typeTiles .chip").forEach(x=>x.classList.toggle("active",x.dataset.kind===document.getElementById("kind").value));
+ render()}
+document.getElementById("smartBtn").addEventListener("click",smartSearch);
+document.getElementById("smartQ").addEventListener("keydown",e=>{if(e.key==="Enter")smartSearch()});
+function renderFeatured(){const el=document.getElementById("featRow"),list=properties.filter(p=>p.featured).slice(0,3);
+ el.innerHTML=list.length?"<h3 style='margin:0 0 10px'>★ Featured properties</h3><div style='display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px'>"+list.map(p=>`<div data-fopen="${p.id}" style="cursor:pointer;border:1px solid #0002;border-radius:14px;overflow:hidden"><div style="height:120px;background:url('${escapeHtml(p.image)}') center/cover"></div><div style="padding:10px"><b>${escapeHtml(p.title)}</b><div style="font-size:13px">${formatNaira(p.price)}</div></div></div>`).join("")+"</div>":""}
+document.getElementById("featRow").addEventListener("click",e=>{const c=e.target.closest("[data-fopen]");if(c){const p=properties.find(x=>x.id===c.dataset.fopen);if(p)showDetails(p)}});
+let myPhone="";
+async function loadMe(){if(!session){myPhone="";return}const{data}=await sb.from("profiles").select("phone").eq("id",session.user.id).maybeSingle();myPhone=(data&&data.phone)||""}
+function prefillContact(){const el=document.getElementById("eContact");if(el&&!el.value)el.value=myPhone||(session&&session.user.email)||""}
+const $=id=>document.getElementById(id);
+async function openAccount(){
+ $("accBackdrop").classList.add("open");$("accEmail").value=session.user.email||"";$("accPass").value="";$("accPass2").value="";
+ const{data}=await sb.from("profiles").select("full_name,phone,company,role").eq("id",session.user.id).maybeSingle();const d=data||{};
+ $("accName").value=d.full_name||"";$("accPhone").value=d.phone||"";$("accCompany").value=d.company||"";$("accRole").value=d.role||"seeker"}
+async function saveAccount(){
+ const phone=$("accPhone").value.trim();
+ if(phone&&!/^\+?[\d\s-]{7,20}$/.test(phone)){toast("Enter a valid phone number");return}
+ const np=$("accPass").value;
+ if(np&&(np.length<6||np!==$("accPass2").value)){toast("New passwords must match and be 6+ characters");return}
+ const{error}=await sb.from("profiles").update({full_name:$("accName").value.trim().slice(0,100)||null,phone:phone||null,company:$("accCompany").value.trim().slice(0,100)||null,role:$("accRole").value}).eq("id",session.user.id);
+ if(error){toast(error.message);return}
+ myPhone=phone;let msg="Details saved";
+ const email=$("accEmail").value.trim();
+ if(email&&email!==session.user.email){const r=await sb.auth.updateUser({email});if(r.error){toast(r.error.message);return}msg="Saved. Check your new email to confirm the change."}
+ if(np){const r=await sb.auth.updateUser({password:np});if(r.error){toast(r.error.message);return}$("accPass").value="";$("accPass2").value="";msg+=" Password updated."}
+ toast(msg)}
+$("accBtn").addEventListener("click",()=>openAccount().catch(e=>toast(e.message)));
+$("accClose").addEventListener("click",()=>$("accBackdrop").classList.remove("open"));
+$("accSave").addEventListener("click",()=>saveAccount().catch(e=>toast(e.message)));
+$("accShow").addEventListener("change",e=>{const t=e.target.checked?"text":"password";$("accPass").type=t;$("accPass2").type=t});
+async function toggleFav(id){const on=!saved.has(id);on?saved.add(id):saved.delete(id);render();toast(on?"Saved":"Removed from saved");
+ if(session){const r=on?await sb.from("favourites").insert({property_id:id}):await sb.from("favourites").delete().eq("property_id",id).eq("user_id",session.user.id);if(r.error)toast(r.error.message)}else{try{localStorage.setItem("hv_saved",JSON.stringify([...saved]))}catch(e){}}}
+async function loadFavs(){if(session){const{data}=await sb.from("favourites").select("property_id");saved=new Set((data||[]).filter(Boolean).map(x=>x.property_id))}else{try{saved=new Set(JSON.parse(localStorage.getItem("hv_saved")||"[]"))}catch(e){}}render()}
+const goHomes=()=>$("homes").scrollIntoView({behavior:"smooth"});
+$("filtBtn").addEventListener("click",()=>document.querySelector(".fp").classList.toggle("open"));
+$("bnHome").addEventListener("click",goHomes);
+$("bnList").addEventListener("click",()=>$("listTop").click());
+$("bnSaved").addEventListener("click",()=>{$("onlySavedBtn").click();goHomes()});
+$("bnAcct").addEventListener("click",()=>session?$("accBtn").click():openAuth());
+$("areas").addEventListener("click",e=>{const b=e.target.closest("[data-area]");if(!b)return;$("location").value=b.dataset.area;render();goHomes()});
+document.addEventListener("click",e=>{if(e.target.id==="emptyClear")$("clearAll").click();if(e.target.id==="emptyList")$("listTop").click()});
+function gSet(i){gIdx=(i+curImgs.length)%curImgs.length;const m=$("gmainImg");if(m)m.src=curImgs[gIdx];document.querySelectorAll("#gthumbs img").forEach((x,k)=>x.classList.toggle("on",k===gIdx));const c=document.querySelector(".gcount");if(c)c.textContent=(gIdx+1)+"/"+curImgs.length+" · tap to enlarge";if($("lb").classList.contains("open"))lbShow()}
+function lbShow(){$("lbImg").src=curImgs[gIdx];$("lbThumbs").innerHTML=curImgs.length>1?curImgs.map((u,i)=>`<img src="${escapeHtml(u)}" data-li="${i}" style="${i===gIdx?"outline:2px solid #fff":"opacity:.5"}">`).join(""):"";$("lbPrev").style.display=$("lbNext").style.display=curImgs.length>1?"":"none"}
+$("dBody").addEventListener("click",e=>{const t=e.target.closest("[data-gi]");if(t){gSet(+t.dataset.gi);return}if(e.target.closest("#gmain")){$("lb").classList.add("open");lbShow()}});
+$("lbClose").onclick=()=>$("lb").classList.remove("open");$("lbPrev").onclick=()=>gSet(gIdx-1);$("lbNext").onclick=()=>gSet(gIdx+1);
+$("lbThumbs").addEventListener("click",e=>{const t=e.target.closest("[data-li]");if(t)gSet(+t.dataset.li)});
+$("lb").addEventListener("click",e=>{if(e.target.id==="lb")$("lb").classList.remove("open")});
+let tx=null;$("lb").addEventListener("touchstart",e=>{tx=e.touches[0].clientX});$("lb").addEventListener("touchend",e=>{if(tx==null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)gSet(gIdx+(d<0?1:-1));tx=null});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("lb").classList.remove("open");closeSide()}if(!$("lb").classList.contains("open"))return;if(e.key==="ArrowRight")gSet(gIdx+1);if(e.key==="ArrowLeft")gSet(gIdx-1)});
+function closeSide(){$("side").classList.remove("open");$("sideShade").classList.remove("open")}
+function openSide(){
+ const adm=$("adminBtn").style.display!=="none",b=(a,t)=>`<button data-act="${a}">${t}</button>`;
+ $("side").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px 10px"><div class="brand"><span class="brand-mark">⌂</span> havenly</div><button data-act="close" aria-label="Close" style="font-size:22px;padding:4px 10px">×</button></div>`+
+ (session?`<div style="font-size:12px;padding:0 10px 8px;color:#69727a;word-break:break-all">${escapeHtml(session.user.email||"")}</div>`+b("dash","▦ My dashboard")+b("saved","♡ Saved homes")+b("account","◉ My account")+b("list","＋ List a property")+(adm?b("admin","⚑ Admin"):""):b("login","→ Log in")+b("signup","✦ Create account")+b("list","＋ List a property"))+
+ `<hr><a href="#homes" data-act="close">Find a home</a><a href="#how" data-act="close">How it works</a><a href="#trust" data-act="close">Trust &amp; safety</a>`+(session?`<hr>`+b("logout","⎋ Log out"):"");
+ $("side").classList.add("open");$("sideShade").classList.add("open")}
+$("menuBtn").addEventListener("click",openSide);$("sideShade").addEventListener("click",closeSide);
+$("side").addEventListener("click",e=>{const a=e.target.closest("[data-act]");if(!a)return;const k=a.dataset.act;closeSide();
+ const m={dash:()=>$("myBtn").click(),saved:()=>{$("onlySavedBtn").click();goHomes()},account:()=>$("accBtn").click(),list:()=>$("listTop").click(),admin:()=>$("adminBtn").click(),logout:()=>sb.auth.signOut(),login:()=>openAuth(),signup:()=>{openAuth();setAuthMode("up")},close:()=>{}};(m[k]||(()=>{}))()});
+render();loadListings();
+</script>
+</body>
+</html>
